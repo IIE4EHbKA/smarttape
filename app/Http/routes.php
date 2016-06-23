@@ -11,6 +11,10 @@
 |
 */
 
+$app->post('/api', [
+    'as' => 'Api',
+    'uses' => 'ApiController@index'
+]);
 $app->get('/api', [
     'as' => 'Api',
     'uses' => 'ApiController@index'
