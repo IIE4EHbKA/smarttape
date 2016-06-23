@@ -52,14 +52,15 @@ class ApiController extends Controller
                 $min = min($rows)->tPrice;
                 $open = $rows[0]->tPrice;
                 $close = $rows[$arraySize]->tPrice;
-                $rows = $rows;
+                $middle = ($max - $min) + $min;
+
                 foreach ($rows as $row) {
                     $allVolume += $row->tVolume;
                 }
 
-                if ($direction == 'Buy' and $open > $close and $close <= $min) {
+                if ($direction == 'Buy' and $open >= $middle and $close <= $middle) {
                     $operation = 'Sell';
-                } elseif ($direction == 'Sell' and $open < $close and $close >= $max) {
+                } elseif ($direction == 'Sell' and $open <= $middle and $close >= $middle) {
                     $operation = 'Buy';
                 }else{
                     $operation = 'Null';
